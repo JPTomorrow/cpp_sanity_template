@@ -13,7 +13,6 @@ A good template for starting out with C++ with a build system that doesn't make 
 - C/C++ (Microsoft)
 - C/C++ Extension Pack (Microsoft)
 
-
 ## Building (WIP)
 
 Working on a comprehensive guide. coming soon!
@@ -22,4 +21,3 @@ Working on a comprehensive guide. coming soon!
 - add testing libraries and frameworks
 - cleanup .vscode folder stuff and see if any of it is even needed
 - possibly add some small fun example programs (SDL3 game?)
-
