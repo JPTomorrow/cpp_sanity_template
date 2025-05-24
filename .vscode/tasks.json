@@ -1,0 +1,75 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    // {
+    //   "label": "build debug",
+    //   "type": "shell",
+    //   "group": {
+    //     "kind": "build",
+    //     "isDefault": true
+    //   },
+    //   "windows": {
+    //     "command": "clang",
+    //     "args": [
+    //       "src/build/build.cpp",
+    //       "src/*.cpp",
+    //       "src/impasta/*.cpp",
+    //       "-o",
+    //       "\"${workspaceFolder}\\bin\\windows_x64\\impasta.exe\"",
+    //       "-g",
+    //       // defines
+    //       "-DWINDOWS",
+    //       "-DEXAMPLES", // runs examples when the program is run // remove for release
+    //       // include
+    //       "-Isrc/impasta",
+    //       // link
+
+    //       // "-lkernel32",
+    //       // "-luser32",
+    //       // warning suppression
+    //       "-Wno-reorder-init-list",
+    //       "-Wno-c99-designator"
+    //     ]
+    //   },
+    //   "options": { "cwd": "${workspaceFolder}" }
+    // },
+
+    //
+    // IGNORE FOR NOW, USE CMAKE TOOLS TO BUILD AND DEBUG INSTEAD
+    //
+    {
+      "label": "build debug",
+      "type": "shell",
+      "dependsOn": ["cmake build project"],
+      "group": {
+        "kind": "none",
+        "isDefault": false
+      },
+      "windows": {
+        "command": "cmake --build . --clean-first",
+        "options": {
+          "cwd": "${workspaceFolder}/bin/windows_x64"
+        }
+      }
+    },
+    {
+      "label": "cmake build project",
+      "type": "shell",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "echo": true,
+        "panel": "shared",
+        "showReuseMessage": false
+      },
+      "windows": {
+        "command": "cmake ../..",
+        "options": {
+          "cwd": "${workspaceFolder}/bin/windows_x64"
+        }
+      }
+    }
+  ]
+}

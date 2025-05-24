@@ -1,0 +1,14 @@
+{
+  "configurations": [
+    {
+      "name": "C++ Windows",
+      "includePath": ["${workspaceFolder}/**"],
+      "defines": ["WINDOWS", "EXAMPLES", "_DEBUG", "UNICODE", "_UNICODE"],
+      "cStandard": "c17",
+      "cppStandard": "c++17",
+      "compilerPath": "C:\\Program Files\\LLVM\\bin\\clang.exe",
+      "intelliSenseMode": "clang-x64"
+    }
+  ],
+  "version": 4
+}
