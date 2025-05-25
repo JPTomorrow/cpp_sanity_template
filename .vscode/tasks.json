@@ -1,21 +1,6 @@
 {
   "version": "2.0.0",
   "tasks": [
-    // {
-    //   "label": "build debug",
-    //   "type": "shell",
-    //   "dependsOn": ["cmake build project"],
-    //   "group": {
-    //     "kind": "none",
-    //     "isDefault": false
-    //   },
-    //   "windows": {
-    //     "command": "cmake --build . --clean-first",
-    //     "options": {
-    //       "cwd": "${workspaceFolder}/bin/windows_x64"
-    //     }
-    //   }
-    // },
     {
       "type": "cmake",
       "label": "cmake build debug",

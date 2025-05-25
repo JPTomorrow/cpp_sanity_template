@@ -15,9 +15,17 @@ A good template for starting out with C++ with a build system that doesn't make 
 
 ## Building (WIP)
 
-Working on a comprehensive guide. coming soon!
+### With VSCode
+- Have the cmake extension build the project files in the /bin directory
+- Run the "cmake build debug" task to generate the binaries from the project files
+- If you hit F5, it will rebuild the binnaries with the "cmake build debug" and then launch the vscode debugger for easy debug env.
+
+### With just CMake
+This "should" generate the same file structure in bin/ as the vscode extension.
+``` bash
+cmake -DCMAKE_EXPORT_COMPILE_COMMANDS:BOOL=TRUE --no-warn-unused-cli -SC:/<PATH_TO_PROJECT>/template_cpp -Bc:/<PATH_TO_PROJECT>/template_cpp/bin
+``` 
 
 ## TODO
 - add testing libraries and frameworks
-- cleanup .vscode folder stuff and see if any of it is even needed
-- possibly add some small fun example programs (SDL3 game?)
+- abstract away an SDL engine for fun that can be removed by the user?

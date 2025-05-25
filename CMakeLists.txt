@@ -23,7 +23,6 @@ FetchContent_Declare(
   GIT_TAG main # or a specific tag/branch/commit
 )
 FetchContent_MakeAvailable(SDL3)
-
 target_link_libraries(${ExeName} PRIVATE SDL3::SDL3)
 
 # add and include all libraries in src folder
