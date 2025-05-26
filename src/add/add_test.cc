@@ -13,13 +13,11 @@
 */
 
 #include <gtest/gtest.h>
+#include "add.h"
 
 // Demonstrate some basic assertions.
 TEST(AddTest, BasicAssertions)
 {
-    // Expect two strings not to be equal.
-    EXPECT_STRNE("hello", "world");
-    // Expect equality.
-    EXPECT_EQ(7 * 6, 42);
-
+    // EXPECT_STRNE("hello", "world");
+    EXPECT_EQ(test_add(1, 2), 3);
 }
