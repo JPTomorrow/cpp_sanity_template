@@ -2,7 +2,7 @@
 #include <SDL3/SDL.h>
 #include <SDL3/SDL_main.h>
 #include <iostream>
-#include "test/test.h"
+#include "add/add.h"
 
 #define MAP_BOX_SCALE 16
 #define MAP_BOX_EDGES_LEN (12 + MAP_BOX_SCALE * 2)

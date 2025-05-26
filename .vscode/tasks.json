@@ -8,6 +8,22 @@
       "targets": ["ALL_BUILD"],
       "group": "build",
       "problemMatcher": []
+    },
+    {
+      "type": "shell",
+      "label": "run tests",
+      "dependsOn": "cmake build debug",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "windows": {
+        "command": "ctest",
+        "options": {
+          "cwd": "${workspaceFolder}/bin/"
+        }
+      },
+      "problemMatcher": []
     }
   ]
 }
