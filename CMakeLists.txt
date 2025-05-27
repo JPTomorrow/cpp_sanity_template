@@ -31,18 +31,39 @@ FetchContent_MakeAvailable(googletest)
 
 # example of how to include a library directly from git
 # it will be pulled and compiled into a lib by cmake
+#FetchContent_Declare(
+#  SDL3
+#  GIT_REPOSITORY https://github.com/libsdl-org/SDL.git
+#  GIT_TAG main # or a specific tag/branch/commit
+#)
+#FetchContent_MakeAvailable(SDL3)
+
 FetchContent_Declare(
-  SDL3
-  GIT_REPOSITORY https://github.com/libsdl-org/SDL.git
-  GIT_TAG main # or a specific tag/branch/commit
+        imgui
+        GIT_REPOSITORY https://github.com/ocornut/imgui.git
+        GIT_TAG docking # or a specific tag/branch/commit
 )
-FetchContent_MakeAvailable(SDL3)
+FetchContent_MakeAvailable(IMGUI)
+# Create ImGui as an interface library
+# THIS NEEDS TO BE DONE FOR FETCHES THAT ARE NOT COMPILED
+# BECAUSE THEY HAVE NO CMakeLists.txt OF THEIR OWN
+# DEFINING HOW THEY SHOULD BE BUILT
+add_library(imgui STATIC
+        ${imgui_SOURCE_DIR}/imgui.cpp
+        ${imgui_SOURCE_DIR}/imgui_demo.cpp
+        ${imgui_SOURCE_DIR}/imgui_draw.cpp
+        ${imgui_SOURCE_DIR}/imgui_tables.cpp
+        ${imgui_SOURCE_DIR}/imgui_widgets.cpp
+)
+target_include_directories(imgui PUBLIC ${imgui_SOURCE_DIR})
+target_link_libraries(${BinaryName} PRIVATE imgui)
+target_include_directories(${BinaryName} PRIVATE ${imgui_SOURCE_DIR})
 
 # linking for main binary
 set( # ADD YOUR LIBS TO THIS VARIABLE TO BE LINKED
   LinkLibs 
-  SDL3::SDL3
-) 
+#  SDL3::SDL3
+)
 target_link_libraries(${BinaryName} PRIVATE ${LinkLibs})
 
 # add and include all libraries in src folder
