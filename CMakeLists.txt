@@ -13,12 +13,13 @@ set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 
 # set c++ standard
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 add_executable(${BinaryName} src/main.cpp)
 
 include(FetchContent)
+
 #Gtest testing framework
 FetchContent_Declare(
         googletest
@@ -28,6 +29,15 @@ FetchContent_Declare(
 # For Windows: Prevent overriding the parent project's compiler/linker settings
 set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 FetchContent_MakeAvailable(googletest)
+
+# logging with spdlog - https://github.com/gabime/spdlog
+FetchContent_Declare(
+        spdlog
+        GIT_REPOSITORY https://github.com/gabime/spdlog.git
+        GIT_TAG v1.x
+        DOWNLOAD_EXTRACT_TIMESTAMP TRUE
+)
+FetchContent_MakeAvailable(spdlog)
 
 # example of how to include a library directly from git
 # it will be pulled and compiled into a lib by cmake
@@ -44,6 +54,16 @@ FetchContent_Declare(
         GIT_TAG docking # or a specific tag/branch/commit
 )
 FetchContent_MakeAvailable(IMGUI)
+# depends on glfw3
+FetchContent_Declare(
+        glfw
+        GIT_REPOSITORY https://github.com/glfw/glfw.git
+        GIT_TAG 3.3.8
+)
+set(GLFW_BUILD_DOCS OFF CACHE BOOL "" FORCE)
+set(GLFW_BUILD_TESTS OFF CACHE BOOL "" FORCE)
+set(GLFW_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
+FetchContent_MakeAvailable(glfw)
 # Create ImGui as an interface library
 # THIS NEEDS TO BE DONE FOR FETCHES THAT ARE NOT COMPILED
 # BECAUSE THEY HAVE NO CMakeLists.txt OF THEIR OWN
@@ -54,15 +74,23 @@ add_library(imgui STATIC
         ${imgui_SOURCE_DIR}/imgui_draw.cpp
         ${imgui_SOURCE_DIR}/imgui_tables.cpp
         ${imgui_SOURCE_DIR}/imgui_widgets.cpp
+        ${imgui_SOURCE_DIR}/backends/imgui_impl_opengl3.cpp
+        ${imgui_SOURCE_DIR}/backends/imgui_impl_glfw.cpp
 )
 target_include_directories(imgui PUBLIC ${imgui_SOURCE_DIR})
-target_link_libraries(${BinaryName} PRIVATE imgui)
-target_include_directories(${BinaryName} PRIVATE ${imgui_SOURCE_DIR})
+target_include_directories(imgui PRIVATE ${imgui_SOURCE_DIR}/backends)
+target_include_directories(${BinaryName} PRIVATE ${imgui_SOURCE_DIR} ${imgui_SOURCE_DIR}/backends)
+target_link_libraries(imgui PUBLIC glfw)
+find_package(OpenGL REQUIRED)
 
-# linking for main binary
+# linking for main binary and test
 set( # ADD YOUR LIBS TO THIS VARIABLE TO BE LINKED
   LinkLibs 
 #  SDL3::SDL3
+        imgui
+        OpenGL::GL
+        glfw
+        spdlog
 )
 target_link_libraries(${BinaryName} PRIVATE ${LinkLibs})
 
