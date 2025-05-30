@@ -30,6 +30,7 @@ public:
 private:
     GLFWwindow* m_Window;
     std::vector<GuiWindow> m_WindowsToRender;
+    static void apply_style();
 };
 
 
