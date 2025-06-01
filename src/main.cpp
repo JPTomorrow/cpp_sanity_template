@@ -1,23 +1,17 @@
 #include <iostream>
-
 #include "gui/gui.h"
 #include <imgui.h>
-
 #include "spdlog/spdlog.h"
+#include <utils/print.h>
+
+#define APP_NAME "Cpp Sanity Template"
 
 
 int main()
 {
-    std::cout << "Hello World!\n";
+    std::cout << "Welcome to: " << APP_NAME << "\n";
+    UTILS::print_os();
     GUI gui = GUI{};
-
-    // struct {
-    //     float frame_rounding = 5.0f;
-    //     ImVec4 primary_color = ImVec4(0.05f, 0.05f, 0.05f, 1.00f);
-    //     ImVec4 secondary_color = ImVec4(1.0f, 0.749f, 0.337f, 1.00f);
-    //     ImVec4 text_color = ImVec4(0.0f, 0.0, 0.0f, 1.00f);
-    //     ImVec4 border_color = ImVec4(0.0f, 0.0, 0.0f, 1.00f);
-    // } style;
 
     gui.add_window_definition(
         "Hello World!",
