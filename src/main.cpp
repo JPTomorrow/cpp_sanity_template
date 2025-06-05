@@ -6,7 +6,6 @@
 
 #define APP_NAME "Cpp Sanity Template"
 
-
 int main()
 {
     std::cout << "Welcome to: " << APP_NAME << "\n";

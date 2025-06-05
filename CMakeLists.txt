@@ -53,7 +53,7 @@ FetchContent_Declare(
         GIT_REPOSITORY https://github.com/ocornut/imgui.git
         GIT_TAG docking # or a specific tag/branch/commit
 )
-FetchContent_MakeAvailable(IMGUI)
+FetchContent_MakeAvailable(imgui)
 # depends on glfw3
 FetchContent_Declare(
         glfw
